@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"goland25/helper"
+	"sync"
 	"time"
 )
 
@@ -46,14 +47,36 @@ func printHobbies() {
 	}
 }
 
+func sendDetails() {
+	// simulate blocking operation
+	time.Sleep(10 * time.Second)
+	fmt.Println("Details sent successfully")
+
+	// decrement the wait group counter
+	wg.Done()
+}
+
+// wait group to wait for all go routines to finish
+var wg = sync.WaitGroup{}
+
 func main() {
 	for {
 		name, birthYear := getUserInput()
 		if name == "" || birthYear == 0 {
-			return
+			break
 		}
 
+		// increment the wait group counter
+		wg.Add(1)
+		// go routine - non-blocking, concurrency
+		go sendDetails()
+
 		fmt.Printf("Thank you %v, your age is %v 🚀 \n", name, helper.CalculateAge(birthYear))
+
 		printHobbies()
+
 	}
+
+	// wait for all go routines to finish
+	// wg.Wait()
 }
