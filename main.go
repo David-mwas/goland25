@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"goland25/helper"
 	"time"
 )
 
@@ -52,7 +53,7 @@ func main() {
 			return
 		}
 
-		fmt.Printf("Thank you %v, your age is %v 🚀 \n", name, calculateAge(birthYear))
+		fmt.Printf("Thank you %v, your age is %v 🚀 \n", name, helper.CalculateAge(birthYear))
 		printHobbies()
 	}
 }

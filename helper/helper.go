@@ -1,7 +1,7 @@
-package main
+package helper
 
 import "time"
 
-func calculateAge(birthYear int) int {
+func CalculateAge(birthYear int) int {
 	return time.Now().Year() - birthYear
 }
