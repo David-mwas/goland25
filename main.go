@@ -5,10 +5,6 @@ import (
 	"time"
 )
 
-func calculateAge(birthYear int) int {
-	return time.Now().Year() - birthYear
-}
-
 func getUserInput() (string, int) {
 	var name string
 	var birthYear int

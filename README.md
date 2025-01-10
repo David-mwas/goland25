@@ -19,7 +19,7 @@ This repository contains a simple Go program that calculates the user's age base
 
 2. Run the program:
    ```sh
-   go run main.go
+   go run . or go run main.go
    ```
 
 ### Program Description
