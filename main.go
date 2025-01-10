@@ -5,65 +5,58 @@ import (
 	"time"
 )
 
-// function i go
 func calculateAge(birthYear int) int {
-
-	// return the age from current year
 	return time.Now().Year() - birthYear
 }
 
-func main() {
-	// variables
+func getUserInput() (string, int) {
 	var name string
 	var birthYear int
 
-	// infinite loop
-	for {
-		// get user input
-		fmt.Println("Enter your name: ")
-		fmt.Scan(&name)
+	fmt.Println("Enter your name: ")
+	fmt.Scan(&name)
 
-		// validate name
-		if name == "" {
-			fmt.Println("Invalid name")
-			return
+	if name == "" {
+		fmt.Println("Invalid name")
+		return "", 0
+	}
+
+	if len(name) < 3 {
+		fmt.Println("Name is too short")
+		return "", 0
+	}
+
+	fmt.Println("Enter your birth year: ")
+	fmt.Scan(&birthYear)
+
+	if birthYear == 0 || birthYear > time.Now().Year() {
+		fmt.Println("Invalid birth year")
+		return "", 0
+	}
+
+	return name, birthYear
+}
+
+func printHobbies() {
+	hobbies := []string{"coding", "reading", "traveling", "swimming", "running"}
+	fmt.Println("Your hobbies are: ")
+
+	for _, hobby := range hobbies {
+		if hobby == "coding" {
+			fmt.Println("You love coding")
 		}
-
-		if len(name) < 3 {
-			fmt.Println("Name is too short")
-			return
-		}
-
-		fmt.Println("Enter your birth year: ")
-
-		fmt.Scan(&birthYear)
-
-		if birthYear == 0 || birthYear > time.Now().Year() {
-			fmt.Println("Invalid birth year")
-			return
-		}
-
-		// print the result
-		fmt.Printf("Thank you %v your age is %v 🚀 \n", name, calculateAge(birthYear))
-
-		// array of strings
-		hobbies := []string{"coding", "reading", "traveling", "swimming", "running"}
-
-		// print the hobbies
-		fmt.Println("Ur hobbies are: ")
-
-		// loop through the hobbies
-		for i := 0; i < len(hobbies); i++ {
-			if hobbies[i] == "coding" {
-				fmt.Println("U love coding")
-				// continue
-
-			}
-
-			fmt.Println(hobbies[i])
-		}
-
+		fmt.Println(hobby)
 	}
 }
 
-// go run main.go
+func main() {
+	for {
+		name, birthYear := getUserInput()
+		if name == "" || birthYear == 0 {
+			return
+		}
+
+		fmt.Printf("Thank you %v, your age is %v 🚀 \n", name, calculateAge(birthYear))
+		printHobbies()
+	}
+}
